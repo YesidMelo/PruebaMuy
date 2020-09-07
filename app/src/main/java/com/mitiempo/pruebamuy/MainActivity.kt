@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.mitiempo.pruebamuy.DataAccess.ProxyVolley.ProxyVolley
+import com.mitiempo.pruebamuy.DataAccess.ProxyVolley.ServiciosApi
+import com.mitiempo.pruebamuy.Modelos.Compania
+import com.mitiempo.pruebamuy.Modelos.ModeloBase
 
 class MainActivity : AppCompatActivity() {
 
@@ -11,5 +14,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val servicioConfigurado = ServiciosApi
+            .ListaEmpleados
+            .conClaseARecibir(Compania::class.java)
+            .conObjetoAEnviar(object : ModeloBase{})
+
+        ProxyVolley(this)
+            .conEscuchadorExito {
+                Log.e("Error","")
+            }
+            .conEscuchadorFalla {
+                Log.e("Error","")
+            }
+            .conServicioAConsultar(servicioConfigurado)
+            .realizarConsulta()
     }
 }

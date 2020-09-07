@@ -9,7 +9,7 @@ enum class ServiciosApi(
     ListaEmpleados("sapardo10/content/master/RH.json",MetodoProxyVolley.GET)
     ;
     private var objetoAEnviar : Any ?= null
-    override fun conObjetoAEnviar(objeto: Any?): ProxyVolley.ProxyVolleyServicio {
+    override fun conObjetoAEnviar(objeto: Any?): ServiciosApi {
         this.objetoAEnviar = objeto
         return this
     }
@@ -19,7 +19,7 @@ enum class ServiciosApi(
     }
 
     private var claseARecibir: Class<*> ?= null
-    override fun conClaseARecibir(clase: Class<Any>) : ProxyVolley.ProxyVolleyServicio {
+    override fun conClaseARecibir(clase: Class<*>) : ServiciosApi {
         this.claseARecibir = clase
         return this
     }

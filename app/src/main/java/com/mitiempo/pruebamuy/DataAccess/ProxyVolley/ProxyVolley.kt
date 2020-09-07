@@ -21,7 +21,7 @@ class ProxyVolley (private val context: Context) {
         fun url(): String
         fun conObjetoAEnviar(objeto : Any?) : ProxyVolleyServicio
         fun traerObjetoAEnviar() : Any?
-        fun conClaseARecibir(clase : Class<Any>): ProxyVolleyServicio
+        fun conClaseARecibir(clase : Class<*>): ProxyVolleyServicio
         fun traerClaseARecibir(): Class<*>?
     }
 
