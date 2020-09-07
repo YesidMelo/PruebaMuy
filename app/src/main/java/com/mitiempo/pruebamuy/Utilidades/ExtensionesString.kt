@@ -3,16 +3,17 @@ package com.mitiempo.pruebamuy.Utilidades
 import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.mitiempo.pruebamuy.DataAccess.Errores.ErrorProblemaAlCastearElObjetoDelServidor
 
-fun String.ConvertirAObjeto(clase : Class<*>) : Any?{
+fun String.convertirAObjeto(clase : Class<*>,escuchadorFalla : (Throwable?)->Unit) : Any?{
     return try {
         Gson().fromJson(this,clase)
     }catch (e: Exception){
-        convertirAListaObjetos(clase)
+        convertirAListaObjetos(clase,escuchadorFalla)
     }
 }
 
-fun String.convertirAListaObjetos(clase : Class<*>) : MutableList<Any> ?{
+fun String.convertirAListaObjetos(clase : Class<*>,escuchadorFalla : (Throwable?)->Unit) : MutableList<Any> ?{
     try {
         val gson = Gson()
 
@@ -31,6 +32,7 @@ fun String.convertirAListaObjetos(clase : Class<*>) : MutableList<Any> ?{
         return listaCasteada
     }catch (e : Exception){
         Log.e("Error","",e)
+        escuchadorFalla.invoke(ErrorProblemaAlCastearElObjetoDelServidor())
         return null
     }
 }

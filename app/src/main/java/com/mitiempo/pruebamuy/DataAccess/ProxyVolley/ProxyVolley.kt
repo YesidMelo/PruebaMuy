@@ -3,7 +3,9 @@ package com.mitiempo.pruebamuy.DataAccess.ProxyVolley
 import android.content.Context
 import android.util.Log
 import com.android.volley.RequestQueue
+import com.android.volley.toolbox.StringRequest
 import com.mitiempo.pruebamuy.DataAccess.Errores.*
+import com.mitiempo.pruebamuy.Utilidades.convertirAJSON
 import com.mitiempo.pruebamuy.Utilidades.verificarConexionInternet
 
 class ProxyVolley (private val context: Context) {
@@ -11,7 +13,7 @@ class ProxyVolley (private val context: Context) {
     interface ProxyVolleyParcelable
 
     interface ProxyVolleyServicio{
-        fun conMetodo() : MetodoProxyVolley
+        fun traerMetodo() : MetodoProxyVolley
         fun url(): String
         fun conObjetoAEnviar(objeto : Any?) : ProxyVolleyServicio
         fun traerObjetoAEnviar() : Any?
@@ -41,11 +43,13 @@ class ProxyVolley (private val context: Context) {
 
     fun realizarConsulta(){
         context.verificarConexionInternet(::consultarApi) { EscuchadorFalla?.invoke(ErrorConexionInternet()) }
-
     }
 
     private fun consultarApi(){
+
         if(!estanTodosLosParametrosParaConsulta()){ return }
+        NukeSSLCerts.nuke()
+        val stringRequest = generarStringRequest()
 
     }
 
@@ -85,5 +89,23 @@ class ProxyVolley (private val context: Context) {
         return true
     }
 
+    private fun generarStringRequest() : StringRequest{
+        val escuchadorExito = EscuchadorCasoExitosoProxyVolley(servicio!!,EscuchadorExito!!,EscuchadorFalla!!)
+        return object : StringRequest(
+            servicio!!.traerMetodo().traerMetodoVolley(),
+            servicio!!.url(),
+            escuchadorExito,
+            EscuchadorFallaProxyVolley(servicio!!,EscuchadorFalla!!)
+        )
+        {
+            override fun getBodyContentType(): String {
+                return "application/json"
+            }
+
+            override fun getBody(): ByteArray {
+                return servicio!!.traerObjetoAEnviar()!!.convertirAJSON()!!.toByteArray()
+            }
+        }
+    }
 
 }

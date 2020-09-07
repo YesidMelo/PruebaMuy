@@ -28,7 +28,7 @@ enum class ServiciosApi(
         return claseARecibir!!
     }
     ;
-    override fun conMetodo(): MetodoProxyVolley {
+    override fun traerMetodo(): MetodoProxyVolley {
         return this.metodo
     }
 

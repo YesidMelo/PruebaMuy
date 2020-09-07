@@ -5,3 +5,4 @@ class ErrorSinEscuchadorExito: Error("No ha ingresado un escuchador para notific
 class ErrorNoHaIngresadoServicioApi: Error("No ha ingresado un servicio de consulta")
 class ErrorUnObjetoAEnviar: Error("No ha ingresado un objeto a enviar")
 class ErrorUnaClaseARecibir: Error("No ha ingresado una clase a recibir")
+class ErrorProblemaAlCastearElObjetoDelServidor: Error("El servidor no esta enviando un json valido")
