@@ -24,7 +24,7 @@ enum class ServiciosApi(
         return this
     }
 
-    override fun traerClaseARecibir(): Class<*> {
+    override fun traerClaseARecibir(): Class<*>? {
         return claseARecibir!!
     }
     ;
