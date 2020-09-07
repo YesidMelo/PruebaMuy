@@ -2,8 +2,12 @@ package com.mitiempo.pruebamuy.DataAccess.ProxyVolley
 
 import android.content.Context
 import android.util.Log
+import com.android.volley.NetworkResponse
 import com.android.volley.RequestQueue
+import com.android.volley.Response
+import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.mitiempo.pruebamuy.DataAccess.Errores.*
 import com.mitiempo.pruebamuy.Utilidades.convertirAJSON
 import com.mitiempo.pruebamuy.Utilidades.verificarConexionInternet
@@ -41,6 +45,19 @@ class ProxyVolley (private val context: Context) {
         return this
     }
 
+    private var manejadorCabezera : ManejadorCabezera = ManejadorCabezera()
+    fun conCabezeras(manejadorCabezera : ManejadorCabezera) : ProxyVolley{
+        this.manejadorCabezera = manejadorCabezera
+        return this
+    }
+
+
+    private var EscuchadorNetworkResponse : ((NetworkResponse?)->Unit) ?= null
+    fun conEscuchadorNetworkResponse (EscuchadorNetworkResponse : ((NetworkResponse?)->Unit)): ProxyVolley {
+        this.EscuchadorNetworkResponse = EscuchadorNetworkResponse
+        return this
+    }
+
     fun realizarConsulta(){
         context.verificarConexionInternet(::consultarApi) { EscuchadorFalla?.invoke(ErrorConexionInternet()) }
     }
@@ -50,6 +67,9 @@ class ProxyVolley (private val context: Context) {
         if(!estanTodosLosParametrosParaConsulta()){ return }
         NukeSSLCerts.nuke()
         val stringRequest = generarStringRequest()
+        requestQueue = Volley.newRequestQueue(context)
+        requestQueue?.cache?.clear()
+        requestQueue!!.add(stringRequest)
 
     }
 
@@ -105,6 +125,21 @@ class ProxyVolley (private val context: Context) {
             override fun getBody(): ByteArray {
                 return servicio!!.traerObjetoAEnviar()!!.convertirAJSON()!!.toByteArray()
             }
+
+            override fun getHeaders(): MutableMap<String, String> {
+                return manejadorCabezera.traerCabezeras()
+            }
+
+            override fun parseNetworkResponse(response: NetworkResponse?): Response<String> {
+                EscuchadorNetworkResponse?.invoke(response)
+                return super.parseNetworkResponse(response)
+            }
+
+            override fun parseNetworkError(volleyError: VolleyError?): VolleyError {
+                EscuchadorFalla?.invoke(volleyError)
+                return super.parseNetworkError(volleyError)
+            }
+
         }
     }
 
