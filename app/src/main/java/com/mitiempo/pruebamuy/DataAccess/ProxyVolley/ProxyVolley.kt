@@ -59,7 +59,9 @@ class ProxyVolley (private val context: Context) {
     }
 
     fun realizarConsulta(){
-        context.verificarConexionInternet(::consultarApi) { EscuchadorFalla?.invoke(ErrorConexionInternet()) }
+        context.verificarConexionInternet(::consultarApi) { EscuchadorFalla?.invoke(
+            ErrorConexionInternet()
+        ) }
     }
 
     private fun consultarApi(){
