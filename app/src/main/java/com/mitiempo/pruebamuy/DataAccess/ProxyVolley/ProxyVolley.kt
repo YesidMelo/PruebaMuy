@@ -36,5 +36,9 @@ class ProxyVolley (private val context: Context) {
         return this
     }
 
+    fun realizarConsulta(){
+
+    }
+
 
 }
