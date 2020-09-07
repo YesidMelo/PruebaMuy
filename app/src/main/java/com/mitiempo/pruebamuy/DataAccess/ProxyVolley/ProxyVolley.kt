@@ -30,7 +30,11 @@ class ProxyVolley (private val context: Context) {
         return this
     }
 
-    fun conServicioAConsultar() : ProxyVolley{
+    private var servicio : ProxyVolleyServicio ?= null
+    fun conServicioAConsultar(servicio : ServiciosApi) : ProxyVolley{
+        this.servicio = servicio
         return this
     }
+
+
 }
