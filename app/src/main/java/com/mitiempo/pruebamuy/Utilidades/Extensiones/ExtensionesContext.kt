@@ -3,7 +3,9 @@ package com.mitiempo.pruebamuy.Utilidades.Extensiones
 import android.content.Context
 import android.content.ContextWrapper
 import android.net.ConnectivityManager
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
+import com.mitiempo.pruebamuy.Presentacion.Dialogos.DialogoGenerico
 import com.mitiempo.pruebamuy.Presentacion.Dialogos.DialogoProgress
 
 fun Context.verificarConexionInternet(conectado : (()->Unit),desconectado : (()->Unit)){
@@ -51,4 +53,23 @@ fun Context.ocultarProgress(){
             .traerInstancia()
             .dismiss()
     }
+}
+
+
+fun Context.mostrarDialogoDetallado(@StringRes rutaTitulo : Int,@StringRes rutaMensaje : Int, EscuchadorRespuesta : (()->Unit)? = null ){
+    if (!esUnContextoValidoParaMostrarMensaje(this)){ return }
+    if(this !is AppCompatActivity){
+        traerContextValido(this).mostrarProgress()
+        return
+    }
+
+    runOnUiThread {
+        DialogoGenerico
+            .traerInstancia()
+            .conTitulo(rutaTitulo)
+            .conMensaje(rutaMensaje)
+            .conEscuchadorAccionBotonAceptar { EscuchadorRespuesta?.invoke() }
+            .mostrarDialogo(supportFragmentManager)
+    }
+
 }

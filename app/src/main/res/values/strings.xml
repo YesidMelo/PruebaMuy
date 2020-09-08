@@ -14,4 +14,11 @@
     <string name="menor_a_mayor">Menor a mayor</string>
     <string name="mayor_a_menor">Mayor a menor</string>
     <string name="no_hay_empleados">No hay empleados</string>
+    <string name="titulo_dialogo">titulo dialogo</string>
+    <string name="mensaje">mensaje</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="sin_internet">Sin internet</string>
+    <string name="este_dispositivo_no_tiene_internet">Este dispositivo no tiene internet</string>
+    <string name="surgio_un_problema_inesperado">Surguio un problema inesperado intentelo mas tarde</string>
+    <string name="problema_inesperado">Problema inesperado</string>
 </resources>

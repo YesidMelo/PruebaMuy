@@ -51,7 +51,7 @@ class ListaEmpleadosFragment  : Fragment() {
                     configurarContendorListaEmpleados()
                 }
                 .conEscuchadorFalla {
-                    Log.e("Error","")
+                    ManejadorMensajesError(context!!,it).mostrarDialogo()
                 }
                 .consultarListaEmpleados()
 

@@ -83,7 +83,7 @@ class DetalleEmpleadoFragment : Fragment() {
                     mostrarDetalleEmpleado()
                 }
                 .conEscuchadorFalla {
-                    Log.e("Error","",it)
+                    ManejadorMensajesError(context!!,it).mostrarDialogo()
                 }
                 .actualizarEsNuevoEmpleado(empleado!!)
         }
