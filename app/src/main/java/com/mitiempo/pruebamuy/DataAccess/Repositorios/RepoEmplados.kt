@@ -2,6 +2,7 @@ package com.mitiempo.pruebamuy.DataAccess.Repositorios
 
 import android.content.Context
 import android.util.Log
+import com.mitiempo.pruebamuy.DataAccess.Errores.ErrorAlConsultarListaDeUsuariosNuevos
 import com.mitiempo.pruebamuy.DataAccess.Errores.ErrorAlMomentoDeInsertarUnObjeto
 import com.mitiempo.pruebamuy.DataAccess.Errores.ErrorSinEscuchadorExito
 import com.mitiempo.pruebamuy.DataAccess.Errores.ErrorSinEscuchadorFallas
@@ -11,6 +12,8 @@ import com.mitiempo.pruebamuy.DataAccess.ProxyVolley.ServiciosApi
 import com.mitiempo.pruebamuy.Modelos.Compania
 import com.mitiempo.pruebamuy.Modelos.Empleado
 import com.mitiempo.pruebamuy.Modelos.ModeloBase
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class RepoEmplados(private val context: Context) {
 
@@ -30,16 +33,21 @@ class RepoEmplados(private val context: Context) {
 
         if (!tengoLosEscuchadores()){ return }
 
-        val servicioConfigurado = ServiciosApi
-            .ListaEmpleados
-            .conClaseARecibir(Compania::class.java)
-            .conObjetoAEnviar(object : ModeloBase {})
+        GlobalScope.launch {
 
-        ProxyVolley(context)
-            .conEscuchadorExito (EscuchadorExito!!)
-            .conEscuchadorFalla (EscuchadorFalla!!)
-            .conServicioAConsultar(servicioConfigurado)
-            .realizarConsulta()
+            val servicioConfigurado = ServiciosApi
+                .ListaEmpleados
+                .conClaseARecibir(Compania::class.java)
+                .conObjetoAEnviar(object : ModeloBase {})
+
+            ProxyVolley(context)
+                .conEscuchadorExito {
+                    actualizaEstadosDeLosEmpleados(it)
+                }
+                .conEscuchadorFalla (EscuchadorFalla!!)
+                .conServicioAConsultar(servicioConfigurado)
+                .realizarConsulta()
+        }
     }
 
     private fun tengoLosEscuchadores() : Boolean{
@@ -55,23 +63,65 @@ class RepoEmplados(private val context: Context) {
         return true
     }
 
-    fun actualizarEsNuevoEmpleado(empleado: Empleado){
+    private fun actualizaEstadosDeLosEmpleados(objetoRespuesta : Any?){
+        GlobalScope.launch {
+            try {
+                val compania = objetoRespuesta as Compania
 
-        if(!tengoLosEscuchadores()){ return }
+                if(compania.employees.isNullOrEmpty()){
+                    EscuchadorExito?.invoke(compania)
+                    return@launch
+                }
 
-        try {
 
-            BaseDatos
-                .traerInstancia(context)
-                ?.empleadoDao()
-                ?.insertar(empleado)
+                val listaEmpleados = BaseDatos
+                    .traerInstancia(context)
+                    ?.empleadoDao()
+                    ?.traerEmpleadosNuevos()
 
-            EscuchadorExito?.invoke(null)
-        } catch (e: Exception) {
-            Log.e("Error","",e)
-            EscuchadorFalla?.invoke(ErrorAlMomentoDeInsertarUnObjeto())
+                if (listaEmpleados.isNullOrEmpty()){
+                    EscuchadorExito?.invoke(compania)
+                    return@launch
+                }
+
+                for (empleadoNuevo in listaEmpleados){
+                    for (empleadoServidor in compania.employees!!){
+                        if (empleadoNuevo.id != empleadoServidor.id!!) { continue }
+                        empleadoServidor.esNuevo = true
+                    }
+                }
+
+                EscuchadorExito?.invoke(compania)
+
+            } catch (e: Exception) {
+                Log.e("Error","",e)
+                EscuchadorFalla?.invoke(ErrorAlConsultarListaDeUsuariosNuevos())
+            }
         }
 
+
+    }
+
+
+
+    fun actualizarEsNuevoEmpleado(empleado: Empleado){
+
+        GlobalScope.launch {
+            if(!tengoLosEscuchadores()){ return@launch }
+
+            try {
+
+                BaseDatos
+                    .traerInstancia(context)
+                    ?.empleadoDao()
+                    ?.insertar(empleado)
+
+                EscuchadorExito?.invoke(null)
+            } catch (e: Exception) {
+                Log.e("Error","",e)
+                EscuchadorFalla?.invoke(ErrorAlMomentoDeInsertarUnObjeto())
+            }
+        }
 
     }
 
