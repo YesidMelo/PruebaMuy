@@ -19,6 +19,8 @@ class VistaBuscadorEmpleado @JvmOverloads constructor(
     }
 
     private fun ponerEscuchadores() {
+
+
         boton_buscar.setOnClickListener {
             actualizarListaEmpleados()
         }
@@ -36,11 +38,6 @@ class VistaBuscadorEmpleado @JvmOverloads constructor(
         return this
     }
 
-    private var EscuchadorRecargarEmpleados : (()->Unit) ?= null
-    fun conEscuchadorRecargarEmpleados(EscuchadorRecargarEmpleados : (()->Unit)) : VistaBuscadorEmpleado{
-        this.EscuchadorRecargarEmpleados = EscuchadorRecargarEmpleados
-        return this
-    }
 
     fun actualizarListaEmpleados(){
 
@@ -48,7 +45,6 @@ class VistaBuscadorEmpleado @JvmOverloads constructor(
             .conEscuchadorListaFiltrada {
                 vistaListaEmpleados
                     ?.conListaEmpleados(it)
-                    ?.conEscuchadorRecargarEmpleados { EscuchadorRecargarEmpleados?.invoke() }
                     ?.actualizarVista()
             }
 

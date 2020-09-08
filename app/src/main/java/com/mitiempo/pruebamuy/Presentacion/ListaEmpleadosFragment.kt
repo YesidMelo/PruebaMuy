@@ -37,7 +37,13 @@ class ListaEmpleadosFragment  : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        ponerEscuchadores()
         cargarListaEmpleados()
+    }
+
+    private fun ponerEscuchadores() {
+        contenedor_lista_empleados
+            .conEscuchadorRecargarEmpleados { cargarListaEmpleados() }
     }
 
     private fun cargarListaEmpleados(){
@@ -64,7 +70,6 @@ class ListaEmpleadosFragment  : Fragment() {
         buscador_empleado
             .conListaEmpleados(traerListaEmpleadosValido(compania))
             .conVistaListaEmpleados(contenedor_lista_empleados)
-            .conEscuchadorRecargarEmpleados { cargarListaEmpleados() }
             .actualizarListaEmpleados()
 
     }
