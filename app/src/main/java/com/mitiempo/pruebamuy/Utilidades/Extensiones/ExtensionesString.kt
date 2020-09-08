@@ -1,4 +1,4 @@
-package com.mitiempo.pruebamuy.Utilidades
+package com.mitiempo.pruebamuy.Utilidades.Extensiones
 
 import android.util.Log
 import com.google.gson.Gson

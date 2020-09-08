@@ -9,8 +9,8 @@ import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.mitiempo.pruebamuy.DataAccess.Errores.*
-import com.mitiempo.pruebamuy.Utilidades.convertirAJSON
-import com.mitiempo.pruebamuy.Utilidades.verificarConexionInternet
+import com.mitiempo.pruebamuy.Utilidades.Extensiones.convertirAJSON
+import com.mitiempo.pruebamuy.Utilidades.Extensiones.verificarConexionInternet
 
 class ProxyVolley (private val context: Context) {
 

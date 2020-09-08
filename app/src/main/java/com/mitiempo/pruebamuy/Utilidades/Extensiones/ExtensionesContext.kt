@@ -1,4 +1,4 @@
-package com.mitiempo.pruebamuy.Utilidades
+package com.mitiempo.pruebamuy.Utilidades.Extensiones
 
 import android.content.Context
 import android.net.ConnectivityManager

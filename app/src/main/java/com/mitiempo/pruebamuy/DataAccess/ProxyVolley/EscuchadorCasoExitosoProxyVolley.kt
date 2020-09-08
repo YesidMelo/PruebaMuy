@@ -1,7 +1,7 @@
 package com.mitiempo.pruebamuy.DataAccess.ProxyVolley
 
 import com.android.volley.Response
-import com.mitiempo.pruebamuy.Utilidades.convertirAObjeto
+import com.mitiempo.pruebamuy.Utilidades.Extensiones.convertirAObjeto
 
 class EscuchadorCasoExitosoProxyVolley(
     private val serviciosApi: ProxyVolley.ProxyVolleyServicio,
