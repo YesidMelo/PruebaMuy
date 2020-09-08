@@ -1,13 +1,14 @@
 package com.mitiempo.pruebamuy.Presentacion
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.mitiempo.pruebamuy.Base.BaseActivity
 import com.mitiempo.pruebamuy.Modelos.Empleado
 import com.mitiempo.pruebamuy.R
 import com.mitiempo.pruebamuy.Utilidades.Constantes.EtiquetasBundle
+import com.mitiempo.pruebamuy.Utilidades.Constantes.EtiquetasNavegacionFragmentos
 import com.mitiempo.pruebamuy.Utilidades.Extensiones.navegarAFragment
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,7 +23,7 @@ class MainActivity : AppCompatActivity() {
                 mostrarFragmentDetalleEmpleado(it)
             }
 
-        navegarAFragment(R.id.contenedor_vistas,fragment)
+        navegarAFragment(R.id.contenedor_vistas,fragment,EtiquetasNavegacionFragmentos.LISTA_EMPLEADOS)
 
     }
 
@@ -34,6 +35,6 @@ class MainActivity : AppCompatActivity() {
         val fragment = DetalleEmpleadoFragment()
         fragment.arguments = bundle
 
-        navegarAFragment(R.id.contenedor_vistas,fragment)
+        navegarAFragment(R.id.contenedor_vistas,fragment,EtiquetasNavegacionFragmentos.DETALLE_EMPLEADO)
     }
 }

@@ -7,6 +7,8 @@ import android.view.View
 import android.widget.LinearLayout
 import com.mitiempo.pruebamuy.Modelos.Empleado
 import com.mitiempo.pruebamuy.R
+import com.mitiempo.pruebamuy.Utilidades.Extensiones.mostrarConAnimacion
+import com.mitiempo.pruebamuy.Utilidades.Extensiones.ocultarConAnimacion
 import kotlinx.android.synthetic.main.vista_lista_empleados.view.*
 
 class VistaListaEmpleados @JvmOverloads constructor(
@@ -32,13 +34,13 @@ class VistaListaEmpleados @JvmOverloads constructor(
     fun actualizarVista(){
         post {
             if(listaEmpleados.isEmpty()){
-                label_notificacion_lista_vacia.visibility = View.VISIBLE
-                recycler_lista_empleados.visibility = View.GONE
+                label_notificacion_lista_vacia.mostrarConAnimacion()
+                recycler_lista_empleados.ocultarConAnimacion()
+
                 return@post
             }
 
-            label_notificacion_lista_vacia.visibility = View.GONE
-            recycler_lista_empleados.visibility = View.VISIBLE
+            label_notificacion_lista_vacia.ocultarConAnimacion()
 
             AdaptadorListaEmpleados(
                 listaEmpleados,
@@ -48,4 +50,6 @@ class VistaListaEmpleados @JvmOverloads constructor(
                 .actualizarLista()
         }
     }
+
+
 }

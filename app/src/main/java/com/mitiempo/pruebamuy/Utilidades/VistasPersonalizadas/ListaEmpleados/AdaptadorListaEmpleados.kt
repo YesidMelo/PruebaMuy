@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mitiempo.pruebamuy.Modelos.Empleado
 import com.mitiempo.pruebamuy.R
+import com.mitiempo.pruebamuy.Utilidades.Extensiones.mostrarConAnimacion
 
 class AdaptadorListaEmpleados(
     private val listaEmpleados : MutableList<Empleado>,
@@ -44,6 +45,7 @@ class AdaptadorListaEmpleados(
             recyclerView.layoutManager = LinearLayoutManager(recyclerView.context)
             recyclerView.setHasFixedSize(true)
             recyclerView.adapter = this
+            recyclerView.mostrarConAnimacion()
         }
     }
 }
