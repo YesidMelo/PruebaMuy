@@ -66,7 +66,7 @@ class DialogoGenerico : DialogFragment()  {
     }
 
      fun mostrarDialogo(fragmentManager: FragmentManager,etiqueta : String = "dialogo generico"){
-         showNow(fragmentManager,etiqueta)
+         show(fragmentManager,etiqueta)
      }
 
     override fun onCreateView(

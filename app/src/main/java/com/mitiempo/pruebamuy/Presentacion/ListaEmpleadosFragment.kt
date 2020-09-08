@@ -64,6 +64,7 @@ class ListaEmpleadosFragment  : Fragment() {
         buscador_empleado
             .conListaEmpleados(traerListaEmpleadosValido(compania))
             .conVistaListaEmpleados(contenedor_lista_empleados)
+            .conEscuchadorRecargarEmpleados { cargarListaEmpleados() }
             .actualizarListaEmpleados()
 
     }

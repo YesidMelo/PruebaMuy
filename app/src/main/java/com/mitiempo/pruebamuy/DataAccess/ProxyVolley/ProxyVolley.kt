@@ -2,10 +2,7 @@ package com.mitiempo.pruebamuy.DataAccess.ProxyVolley
 
 import android.content.Context
 import android.util.Log
-import com.android.volley.NetworkResponse
-import com.android.volley.RequestQueue
-import com.android.volley.Response
-import com.android.volley.VolleyError
+import com.android.volley.*
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.mitiempo.pruebamuy.DataAccess.Errores.*
@@ -68,7 +65,10 @@ class ProxyVolley (private val context: Context) {
 
         if(!estanTodosLosParametrosParaConsulta()){ return }
         NukeSSLCerts.nuke()
+
         val stringRequest = generarStringRequest()
+        adicionarTiempoDeEspera(stringRequest)
+
         requestQueue = Volley.newRequestQueue(context)
         requestQueue?.cache?.clear()
         requestQueue!!.add(stringRequest)
@@ -145,4 +145,17 @@ class ProxyVolley (private val context: Context) {
         }
     }
 
+
+    private var tiempoDeEspera = 30_000
+    private fun adicionarTiempoDeEspera(stringRequest: StringRequest){
+        stringRequest.setRetryPolicy(
+
+            DefaultRetryPolicy(
+                tiempoDeEspera,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+            )
+
+        )
+    }
 }

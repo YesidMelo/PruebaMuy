@@ -17,6 +17,13 @@ class VistaListaEmpleados @JvmOverloads constructor(
 
     init {
         LayoutInflater.from(context).inflate(R.layout.vista_lista_empleados,this,true)
+        ponerEscuchadores()
+    }
+
+    private fun ponerEscuchadores() {
+        label_notificacion_lista_vacia.setOnClickListener {
+            EscuchadorRecargarEmpleados?.invoke()
+        }
     }
 
     private var listaEmpleados = emptyList<Empleado>().toMutableList()
@@ -29,6 +36,12 @@ class VistaListaEmpleados @JvmOverloads constructor(
     fun conEscuchadorEmpleadoSeleccionado(EscuchadorEmpleadoSeleccionado : ((Empleado)->Unit)) : VistaListaEmpleados {
         this.EscuchadorEmpleadoSeleccionado = EscuchadorEmpleadoSeleccionado
        return this
+    }
+
+    private var EscuchadorRecargarEmpleados : (()->Unit) ?= null
+    fun conEscuchadorRecargarEmpleados(EscuchadorRecargarEmpleados : (()->Unit)) : VistaListaEmpleados{
+        this.EscuchadorRecargarEmpleados = EscuchadorRecargarEmpleados
+        return this
     }
 
     fun actualizarVista(){

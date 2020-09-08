@@ -36,12 +36,19 @@ class VistaBuscadorEmpleado @JvmOverloads constructor(
         return this
     }
 
+    private var EscuchadorRecargarEmpleados : (()->Unit) ?= null
+    fun conEscuchadorRecargarEmpleados(EscuchadorRecargarEmpleados : (()->Unit)) : VistaBuscadorEmpleado{
+        this.EscuchadorRecargarEmpleados = EscuchadorRecargarEmpleados
+        return this
+    }
+
     fun actualizarListaEmpleados(){
 
         val filtro = FiltroEmpleados(listaEmpleados)
             .conEscuchadorListaFiltrada {
                 vistaListaEmpleados
                     ?.conListaEmpleados(it)
+                    ?.conEscuchadorRecargarEmpleados { EscuchadorRecargarEmpleados?.invoke() }
                     ?.actualizarVista()
             }
 
