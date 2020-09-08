@@ -10,6 +10,8 @@ import com.mitiempo.pruebamuy.DataAccess.Repositorios.RepoEmplados
 import com.mitiempo.pruebamuy.Modelos.Empleado
 import com.mitiempo.pruebamuy.R
 import com.mitiempo.pruebamuy.Utilidades.Constantes.EtiquetasBundle
+import com.mitiempo.pruebamuy.Utilidades.Extensiones.mostrarProgress
+import com.mitiempo.pruebamuy.Utilidades.Extensiones.ocultarProgress
 import kotlinx.android.synthetic.main.detalle_empleado_fragment.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -75,10 +77,11 @@ class DetalleEmpleadoFragment : Fragment() {
     }
 
     private fun actualizarEstadoEmpleado(){
-
         GlobalScope.launch {
             RepoEmplados(context!!)
-                .conEscuchadorExito { mostrarDetalleEmpleado() }
+                .conEscuchadorExito {
+                    mostrarDetalleEmpleado()
+                }
                 .conEscuchadorFalla {
                     Log.e("Error","",it)
                 }

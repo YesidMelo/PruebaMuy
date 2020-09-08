@@ -13,3 +13,4 @@ fun AppCompatActivity.navegarAFragment(@IdRes idContenedor : Int, fragment : Fra
             .commit()
     }
 }
+

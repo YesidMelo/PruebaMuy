@@ -11,6 +11,8 @@ import com.mitiempo.pruebamuy.DataAccess.Repositorios.RepoEmplados
 import com.mitiempo.pruebamuy.Modelos.Compania
 import com.mitiempo.pruebamuy.Modelos.Empleado
 import com.mitiempo.pruebamuy.R
+import com.mitiempo.pruebamuy.Utilidades.Extensiones.mostrarProgress
+import com.mitiempo.pruebamuy.Utilidades.Extensiones.ocultarProgress
 import kotlinx.android.synthetic.main.lista_empleados_fragment.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -42,7 +44,7 @@ class ListaEmpleadosFragment  : Fragment() {
         if (context == null){ return }
 
         GlobalScope.launch {
-
+            context!!.mostrarProgress()
             RepoEmplados(context!!)
                 .conEscuchadorExito { compania ->
                     configurarBuscadorEmpleado(compania)
@@ -70,7 +72,7 @@ class ListaEmpleadosFragment  : Fragment() {
 
         contenedor_lista_empleados
             .conEscuchadorEmpleadoSeleccionado { EscuchadorEmpleadoSeleccionado?.invoke(it) }
-
+        context!!.ocultarProgress()
     }
 
     private fun traerListaEmpleadosValido(objeto : Any?) : MutableList<Empleado>{
