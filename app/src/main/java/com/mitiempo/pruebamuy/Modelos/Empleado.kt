@@ -1,11 +1,18 @@
 package com.mitiempo.pruebamuy.Modelos
 
+import androidx.room.Entity
+import androidx.room.Ignore
+import androidx.room.PrimaryKey
+
+@Entity
 class Empleado : ModeloBase {
 
-    var id :Int  ?= null
-    var name :String  ?= null
-    var position :String  ?= null
-    var wage :String  ?= null
-    var employees :MutableList<Empleado>  ?= null
+    @PrimaryKey var id :Int  ?= null
+    @Ignore var name :String  ?= null
+    @Ignore var position :String  ?= null
+    @Ignore var wage :String  ?= null
+
     var esNuevo : Boolean ?= false
+
+    @Ignore var employees :MutableList<Empleado>  ?= null
 }

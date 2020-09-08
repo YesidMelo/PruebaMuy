@@ -2,11 +2,14 @@ package com.mitiempo.pruebamuy.DataAccess.Repositorios
 
 import android.content.Context
 import android.util.Log
+import com.mitiempo.pruebamuy.DataAccess.Errores.ErrorAlMomentoDeInsertarUnObjeto
 import com.mitiempo.pruebamuy.DataAccess.Errores.ErrorSinEscuchadorExito
 import com.mitiempo.pruebamuy.DataAccess.Errores.ErrorSinEscuchadorFallas
+import com.mitiempo.pruebamuy.DataAccess.ProxyRoom.BaseDatos
 import com.mitiempo.pruebamuy.DataAccess.ProxyVolley.ProxyVolley
 import com.mitiempo.pruebamuy.DataAccess.ProxyVolley.ServiciosApi
 import com.mitiempo.pruebamuy.Modelos.Compania
+import com.mitiempo.pruebamuy.Modelos.Empleado
 import com.mitiempo.pruebamuy.Modelos.ModeloBase
 
 class RepoEmplados(private val context: Context) {
@@ -50,6 +53,26 @@ class RepoEmplados(private val context: Context) {
             return false
         }
         return true
+    }
+
+    fun actualizarEsNuevoEmpleado(empleado: Empleado){
+
+        if(!tengoLosEscuchadores()){ return }
+
+        try {
+
+            BaseDatos
+                .traerInstancia(context)
+                ?.empleadoDao()
+                ?.insertar(empleado)
+
+            EscuchadorExito?.invoke(null)
+        } catch (e: Exception) {
+            Log.e("Error","",e)
+            EscuchadorFalla?.invoke(ErrorAlMomentoDeInsertarUnObjeto())
+        }
+
+
     }
 
 }

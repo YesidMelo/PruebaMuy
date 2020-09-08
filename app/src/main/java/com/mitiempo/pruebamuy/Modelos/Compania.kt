@@ -1,5 +1,6 @@
 package com.mitiempo.pruebamuy.Modelos
 
+
 class Compania : ModeloBase {
 
     var company_name : String ?= null
