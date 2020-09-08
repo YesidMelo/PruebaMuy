@@ -13,4 +13,5 @@
     <string name="ordenar_por_salario">Ordenar por salario</string>
     <string name="menor_a_mayor">Menor a mayor</string>
     <string name="mayor_a_menor">Mayor a menor</string>
+    <string name="no_hay_empleados">No hay empleados</string>
 </resources>

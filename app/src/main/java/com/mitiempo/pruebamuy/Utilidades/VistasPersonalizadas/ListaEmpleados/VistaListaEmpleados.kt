@@ -3,6 +3,7 @@ package com.mitiempo.pruebamuy.Utilidades.VistasPersonalizadas.ListaEmpleados
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.LinearLayout
 import com.mitiempo.pruebamuy.Modelos.Empleado
 import com.mitiempo.pruebamuy.R
@@ -30,6 +31,15 @@ class VistaListaEmpleados @JvmOverloads constructor(
 
     fun actualizarVista(){
         post {
+            if(listaEmpleados.isEmpty()){
+                label_notificacion_lista_vacia.visibility = View.VISIBLE
+                recycler_lista_empleados.visibility = View.GONE
+                return@post
+            }
+
+            label_notificacion_lista_vacia.visibility = View.GONE
+            recycler_lista_empleados.visibility = View.VISIBLE
+
             AdaptadorListaEmpleados(
                 listaEmpleados,
                 recycler_lista_empleados
