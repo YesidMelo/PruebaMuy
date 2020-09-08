@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="titulo_item_lista_empleados">16sp</dimen>
+    <dimen name="subtitulo1_item_lista_empleados">14sp</dimen>
+    <dimen name="subtitulo2_item_lista_empleados">12sp</dimen>
+
+    <dimen name="titulo_normal">18sp</dimen>
+    <dimen name="subtitulo1_normal">16sp</dimen>
+    <dimen name="subtitulo2_normal">14sp</dimen>
+
+</resources>

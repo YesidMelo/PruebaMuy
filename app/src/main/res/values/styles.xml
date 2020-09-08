@@ -8,4 +8,36 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="titulo_item_lista_empleados" >
+        <item name="android:textSize">@dimen/titulo_item_lista_empleados</item>
+        <item name="android:textColor">@color/negro</item>
+    </style>
+
+    <style name="subtitulo1_titulo_item_lista_empleados" >
+        <item name="android:textSize">@dimen/subtitulo1_item_lista_empleados</item>
+        <item name="android:textColor">@color/negro</item>
+    </style>
+
+    <style name="subtitulo2_titulo_item_lista_empleados" >
+        <item name="android:textSize">@dimen/subtitulo2_item_lista_empleados</item>
+        <item name="android:textColor">@color/negro</item>
+    </style>
+
+    <style name="titulo_normal" >
+        <item name="android:textSize">@dimen/titulo_normal</item>
+        <item name="android:textColor">@color/negro</item>
+    </style>
+
+    <style name="subtitulo1_normal" >
+        <item name="android:textSize">@dimen/subtitulo1_normal</item>
+        <item name="android:textColor">@color/negro</item>
+    </style>
+
+    <style name="subtitulo2_normal" >
+        <item name="android:textSize">@dimen/subtitulo2_normal</item>
+        <item name="android:textColor">@color/negro</item>
+    </style>
+
+
+
 </resources>

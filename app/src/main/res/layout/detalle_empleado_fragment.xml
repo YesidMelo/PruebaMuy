@@ -25,6 +25,7 @@
 
             <TextView
                 android:id="@+id/label_nombre_detalle"
+                style="@style/titulo_normal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -37,6 +38,7 @@
 
             <TextView
                 android:id="@+id/label_posicion"
+                style="@style/subtitulo1_normal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/mock_cargo"
@@ -46,6 +48,7 @@
 
             <TextView
                 android:id="@+id/label_salario"
+                style="@style/subtitulo2_normal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/mock_salario"
