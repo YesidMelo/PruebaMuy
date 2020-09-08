@@ -4,6 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.mitiempo.pruebamuy.Utilidades.VistasPersonalizadas.BuscadorEmpleado.VistaBuscadorEmpleado
+        android:id="@+id/buscador_empleado"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.mitiempo.pruebamuy.Utilidades.VistasPersonalizadas.ListaEmpleados.VistaListaEmpleados
         android:id="@+id/contenedor_lista_empleados"
         android:layout_width="0dp"
@@ -11,6 +19,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/buscador_empleado" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

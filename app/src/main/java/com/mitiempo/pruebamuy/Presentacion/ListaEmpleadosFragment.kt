@@ -45,12 +45,8 @@ class ListaEmpleadosFragment  : Fragment() {
 
             RepoEmplados(context!!)
                 .conEscuchadorExito { compania ->
-
-                    contenedor_lista_empleados
-                        .conListaEmpleados(traerListaEmpleadosValido(compania))
-                        .conEscuchadorEmpleadoSeleccionado { EscuchadorEmpleadoSeleccionado?.invoke(it) }
-                        .actualizarVista()
-
+                    configurarBuscadorEmpleado(compania)
+                    configurarContendorListaEmpleados()
                 }
                 .conEscuchadorFalla {
                     Log.e("Error","")
@@ -58,6 +54,22 @@ class ListaEmpleadosFragment  : Fragment() {
                 .consultarListaEmpleados()
 
         }
+
+    }
+
+    private fun configurarBuscadorEmpleado( compania: Any? ){
+
+        buscador_empleado
+            .conListaEmpleados(traerListaEmpleadosValido(compania))
+            .conVistaListaEmpleados(contenedor_lista_empleados)
+            .actualizarListaEmpleados()
+
+    }
+
+    private fun configurarContendorListaEmpleados(){
+
+        contenedor_lista_empleados
+            .conEscuchadorEmpleadoSeleccionado { EscuchadorEmpleadoSeleccionado?.invoke(it) }
 
     }
 
