@@ -7,4 +7,5 @@ class Empleado : ModeloBase {
     var position :String  ?= null
     var wage :String  ?= null
     var employees :MutableList<Empleado>  ?= null
+    var esNuevo : Boolean ?= false
 }

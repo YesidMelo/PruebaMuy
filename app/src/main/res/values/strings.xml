@@ -4,4 +4,9 @@
     <string name="mock_cargo">CEO</string>
     <string name="nombre_empleado">Nombre empleado</string>
     <string name="cargo">Cargo</string>
+    <string name="mock_salario">4542</string>
+    <string name="salario">Salario</string>
+    <string name="es_nuevo">Es nuevo</string>
+    <string name="no">No</string>
+    <string name="si">Si</string>
 </resources>
