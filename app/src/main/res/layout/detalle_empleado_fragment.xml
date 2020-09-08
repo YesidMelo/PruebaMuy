@@ -58,8 +58,11 @@
 
             <TextView
                 android:id="@+id/label_es_nuevo"
+                style="@style/boton_nuevo_empleado"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/fondo_boton_nuevo_empleado"
                 android:text="@string/es_nuevo"
                 app:layout_constraintEnd_toEndOf="@+id/label_salario"
                 app:layout_constraintStart_toStartOf="@+id/label_salario"
@@ -69,6 +72,7 @@
                 android:id="@+id/lista_empleados_detalle"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:layout_marginTop="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/label_es_nuevo"
                 app:layout_constraintStart_toStartOf="@+id/label_es_nuevo"
