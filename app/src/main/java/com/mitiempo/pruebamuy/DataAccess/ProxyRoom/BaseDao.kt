@@ -5,18 +5,19 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 
-interface BaseDao {
+@Dao
+interface BaseDao <T : BaseDao.RoomParcelable> {
 
     interface RoomParcelable
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun <T : RoomParcelable> insertar(objeto : T)
+    fun  insertar(objeto : T)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun <T : RoomParcelable> insertarTodo(listaObjetos : MutableList<T>)
+    fun insertarTodo(listaObjetos : MutableList<T>)
 
     @Delete
-    fun <T : RoomParcelable> borrar(objeto : T)
+    fun borrar(objeto : T)
 
 
 }
