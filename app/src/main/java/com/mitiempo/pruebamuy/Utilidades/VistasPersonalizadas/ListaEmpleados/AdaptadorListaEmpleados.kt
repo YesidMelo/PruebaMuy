@@ -24,7 +24,7 @@ class AdaptadorListaEmpleados(
     }
 
     override fun onBindViewHolder(holder: ItemRecyclerEmpleados, position: Int) {
-        (holder.vista as VistaItemListaEmpleados)
+        (holder.vista.findViewById(R.id.item_empleado) as VistaItemListaEmpleados)
             .conEmpleado(listaEmpleados[position])
             .conEscuchadorEmpleadoSeleccionado(EscuchadorEmpleadoSeleccionado!!)
             .actualizarVista()
