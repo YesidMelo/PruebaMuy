@@ -9,4 +9,8 @@
     <string name="es_nuevo">Es nuevo</string>
     <string name="no">No</string>
     <string name="si">Si</string>
+    <string name="empleados_nuevos">Empleados Nuevos</string>
+    <string name="ordenar_por_salario">Ordenar por salario</string>
+    <string name="menor_a_mayor">Menor a mayor</string>
+    <string name="mayor_a_menor">Mayor a menor</string>
 </resources>

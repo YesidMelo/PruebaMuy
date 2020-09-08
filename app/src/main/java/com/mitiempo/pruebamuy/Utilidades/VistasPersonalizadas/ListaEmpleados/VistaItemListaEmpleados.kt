@@ -42,6 +42,7 @@ class VistaItemListaEmpleados @JvmOverloads constructor(
         post {
             label_nombre.setText(String.format("%s : %s",context.getString(R.string.nombre_empleado),empleado!!.name))
             mostrarCargo()
+            mostrarSalario()
         }
     }
 
@@ -53,5 +54,12 @@ class VistaItemListaEmpleados @JvmOverloads constructor(
         label_cargo.setText(String.format("%s : %s",context.getString(R.string.cargo),empleado!!.position))
         label_cargo.visibility = View.VISIBLE
     }
-
+    private fun mostrarSalario(){
+        if(empleado!!.wage == null ){
+            label_salario.visibility = View.GONE
+            return
+        }
+        label_salario.visibility = View.VISIBLE
+        label_salario.setText(String.format("%s : %s",context.getString(R.string.salario),empleado!!.wage!!))
+    }
 }

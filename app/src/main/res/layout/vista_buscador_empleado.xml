@@ -9,7 +9,6 @@
         android:id="@+id/contenedor_empleado_a_buscar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/boton_buscar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -29,4 +28,42 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/contenedor_empleado_a_buscar"
         app:srcCompat="@android:drawable/ic_menu_search" />
+
+    <CheckBox
+        android:id="@+id/check_empleados_nuevos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/empleados_nuevos"
+        app:layout_constraintBottom_toBottomOf="@+id/radioGroup"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/radioGroup" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/check_empleados_nuevos"
+        app:layout_constraintTop_toBottomOf="@+id/contenedor_empleado_a_buscar">
+
+        <TextView
+            android:id="@+id/label_orden_salario"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/ordenar_por_salario"
+            android:textAlignment="center" />
+
+        <RadioButton
+            android:id="@+id/radio_button_menor_a_mayor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/menor_a_mayor" />
+
+        <RadioButton
+            android:id="@+id/radio_button_mayor_a_menor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/mayor_a_menor" />
+    </RadioGroup>
 </androidx.constraintlayout.widget.ConstraintLayout>

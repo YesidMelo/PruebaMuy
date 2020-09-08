@@ -45,14 +45,41 @@ class VistaBuscadorEmpleado @JvmOverloads constructor(
                     ?.actualizarVista()
             }
 
+        adicionarFiltroPalabra(filtro)
+        adicionarFiltroSalario(filtro)
+        adicionarFiltroNuevos(filtro)
+
+        filtro.filtrarLista()
+
+    }
+
+
+    private fun adicionarFiltroPalabra(filtro: FiltroEmpleados) {
         if (empleado_a_buscar.text!!.toString().isNotEmpty()){
             filtro.conFiltro {
                 val validacion = it.name!!.toLowerCase().contains(empleado_a_buscar.text.toString().toLowerCase())
                 return@conFiltro validacion
             }
         }
+    }
 
-        filtro.filtrarLista()
+    private fun adicionarFiltroSalario(filtro: FiltroEmpleados) {
+
+        if(radio_button_menor_a_mayor.isChecked){
+            filtro.ordernarSalarioDeMayorAMenor(false)
+            return
+        }
+
+        if (radio_button_mayor_a_menor.isChecked) {
+            filtro.ordernarSalarioDeMayorAMenor(true)
+        }
+    }
+
+    private fun adicionarFiltroNuevos(filtro: FiltroEmpleados) {
+
+        if(check_empleados_nuevos.isChecked) {
+            filtro.conFiltro { return@conFiltro it.esNuevo == true }
+        }
 
     }
 

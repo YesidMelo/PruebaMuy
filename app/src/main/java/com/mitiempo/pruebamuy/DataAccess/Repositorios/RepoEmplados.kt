@@ -102,8 +102,6 @@ class RepoEmplados(private val context: Context) {
 
     }
 
-
-
     fun actualizarEsNuevoEmpleado(empleado: Empleado){
 
         GlobalScope.launch {

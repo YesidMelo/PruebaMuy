@@ -7,7 +7,8 @@ import com.mitiempo.pruebamuy.DataAccess.Errores.ErrorProblemaAlCastearElObjetoD
 
 fun String.convertirAObjeto(clase : Class<*>,escuchadorFalla : (Throwable?)->Unit) : Any?{
     return try {
-        Gson().fromJson(this,clase)
+        val objeto = Gson().fromJson(this,clase)
+        objeto
     }catch (e: Exception){
         convertirAListaObjetos(clase,escuchadorFalla)
     }
